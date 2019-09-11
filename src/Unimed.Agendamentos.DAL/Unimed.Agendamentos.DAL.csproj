@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Repository\" />
+    <Folder Include="Mappings\" />
+    <Folder Include="Context\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Unimed.Agendamentos.BLL\Unimed.Agendamentos.BLL.csproj" />
+  </ItemGroup>
+
+</Project>

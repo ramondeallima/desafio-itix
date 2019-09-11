@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Unimed.Agendamentos.UI.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using UnimedAgendamentos.DAL.Context;
 
 namespace Unimed.Agendamentos.UI
 {
@@ -31,8 +32,11 @@ namespace Unimed.Agendamentos.UI
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<UnimedAgendamentosDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();

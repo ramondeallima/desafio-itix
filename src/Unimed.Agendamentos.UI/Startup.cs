@@ -9,6 +9,8 @@ using Unimed.Agendamentos.UI.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UnimedAgendamentos.DAL.Context;
+using Unimed.Agendamentos.DAL.Repository;
+using Unimed.Agendamentos.BLL.Interfaces;
 
 namespace Unimed.Agendamentos.UI
 {
@@ -42,6 +44,12 @@ namespace Unimed.Agendamentos.UI
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddScoped<UnimedAgendamentosDbContext>();
+            services.AddScoped<IPacienteRepository, PacienteRepository>();
+            services.AddScoped<IMedicoRepository, MedicoRepository>();
+            services.AddScoped<IAgendamentosRepository, AgendamentoRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

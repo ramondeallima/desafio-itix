@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using UnimedAgendamentos.DAL.Context;
 using Unimed.Agendamentos.DAL.Repository;
 using Unimed.Agendamentos.BLL.Interfaces;
+using AutoMapper;
 
 namespace Unimed.Agendamentos.UI
 {
@@ -42,6 +43,8 @@ namespace Unimed.Agendamentos.UI
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 

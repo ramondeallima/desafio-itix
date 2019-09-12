@@ -1,6 +1,6 @@
 using System;
 
-namespace Unimed.Agendamentos.UI.Models
+namespace Unimed.Agendamentos.UI.ViewModels
 {
     public class ErrorViewModel
     {

@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29230.47
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unimed.Agendamentos.BLL", "src\Unimed.Agendamentos.BLL\Unimed.Agendamentos.BLL.csproj", "{19D602DA-3841-4A69-B32F-651D5AF7A5EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unimed.Agendamentos.BLL", "src\Unimed.Agendamentos.BLL\Unimed.Agendamentos.BLL.csproj", "{19D602DA-3841-4A69-B32F-651D5AF7A5EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unimed.Agendamentos.DAL", "src\Unimed.Agendamentos.DAL\Unimed.Agendamentos.DAL.csproj", "{87D8C66D-754A-4F6E-B87F-841C4A07707D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unimed.Agendamentos.DAL", "src\Unimed.Agendamentos.DAL\Unimed.Agendamentos.DAL.csproj", "{87D8C66D-754A-4F6E-B87F-841C4A07707D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unimed.Agendamentos.UI", "src\Unimed.Agendamentos.UI\Unimed.Agendamentos.UI.csproj", "{728227A5-55DC-445D-BCDC-1113AB43FD88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unimed.Agendamentos.UI", "src\Unimed.Agendamentos.UI\Unimed.Agendamentos.UI.csproj", "{728227A5-55DC-445D-BCDC-1113AB43FD88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

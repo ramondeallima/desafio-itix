@@ -21,7 +21,7 @@ namespace Unimed.Agendamentos.UI.ViewModels
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public Guid PacienteId { get; set; }
 
-        [DisplayName("Inicio")]
+        [DisplayName("Início")]
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public DateTime InicioAtendimento { get; set; }
 
@@ -29,7 +29,7 @@ namespace Unimed.Agendamentos.UI.ViewModels
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public DateTime FimAtendimento { get; set; }
 
-        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        [DisplayName("Observação")]
         public string Observacao { get; set; }
 
         [ScaffoldColumn(false)]
@@ -37,5 +37,8 @@ namespace Unimed.Agendamentos.UI.ViewModels
 
         public PacienteViewModel Paciente { get; set; }
         public MedicoViewModel Medico { get; set; }
+
+        public IEnumerable<PacienteViewModel> Pacientes { get; set; }
+        public IEnumerable<MedicoViewModel> Medicos { get; set; }
     }
 }

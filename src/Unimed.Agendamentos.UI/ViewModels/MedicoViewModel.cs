@@ -20,6 +20,6 @@ namespace Unimed.Agendamentos.UI.ViewModels
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public string Telefone { get; set; }
 
-        public IEnumerable<AgendamentoViewModel> Agendamentos { get; set; }
+        //public IEnumerable<AgendamentoViewModel> Agendamentos { get; set; }
     }
 }

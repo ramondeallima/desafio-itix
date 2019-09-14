@@ -14,19 +14,19 @@ namespace Unimed.Agendamentos.UI.ViewModels
         public Guid Id { get; set; }
 
         [DisplayName("Médico")]
-        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        [Required(ErrorMessage = "É necessário informar o médico")]
         public Guid MedicoId { get; set; }
 
         [DisplayName("Paciente")]
-        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        [Required(ErrorMessage = "É necessário informar o paciente")]
         public Guid PacienteId { get; set; }
 
         [DisplayName("Início")]
-        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        [Required(ErrorMessage = "É necessário informar o horário de início")]
         public DateTime InicioAtendimento { get; set; }
 
         [DisplayName("Término")]
-        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        [Required(ErrorMessage = "É necessário informar o horário de término")]
         public DateTime FimAtendimento { get; set; }
 
         [DisplayName("Observação")]

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -13,6 +14,7 @@ using UnimedAgendamentos.BLL.Models;
 
 namespace Unimed.Agendamentos.UI.Controllers
 {
+    [DisplayColumn("Médicos")]
     public class MedicosController : Controller
     {
         private readonly IMedicoRepository _medicoRepository;

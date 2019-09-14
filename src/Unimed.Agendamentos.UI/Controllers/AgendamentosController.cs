@@ -47,7 +47,11 @@ namespace Unimed.Agendamentos.UI.Controllers
 
         public async Task<IActionResult> Create()
         {
-            var agendamentoViewModel = await PopularPacientesMedicos(new AgendamentoViewModel());
+            var agendamentoViewModel = new AgendamentoViewModel();
+
+            agendamentoViewModel.Pacientes = _mapper.Map<IEnumerable<PacienteViewModel>>(await _pacienteRepository.ObterTodos());
+            agendamentoViewModel.Medicos = _mapper.Map<IEnumerable<MedicoViewModel>>(await _medicoRepository.ObterTodos());
+
             return View(agendamentoViewModel);
         }
 
@@ -55,13 +59,14 @@ namespace Unimed.Agendamentos.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AgendamentoViewModel agendamentoViewModel)
         {
-            agendamentoViewModel = await PopularPacientesMedicos(agendamentoViewModel);
+            agendamentoViewModel.Pacientes = _mapper.Map<IEnumerable<PacienteViewModel>>(await _pacienteRepository.ObterTodos());
+            agendamentoViewModel.Medicos = _mapper.Map<IEnumerable<MedicoViewModel>>(await _medicoRepository.ObterTodos());
 
             if (!ModelState.IsValid) return View(agendamentoViewModel);
 
             await _agendamentoRepository.Adicionar(_mapper.Map<Agendamento>(agendamentoViewModel));
 
-            return View(agendamentoViewModel);
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Edit(Guid id)
@@ -123,13 +128,6 @@ namespace Unimed.Agendamentos.UI.Controllers
 
             return agendamento;
         }
-        private async Task<AgendamentoViewModel> PopularPacientesMedicos(AgendamentoViewModel agendamento)
-        {
-            agendamento.Pacientes = _mapper.Map<IEnumerable<PacienteViewModel>>(await _pacienteRepository.ObterTodos());
-            agendamento.Medicos = _mapper.Map<IEnumerable<MedicoViewModel>>(await _pacienteRepository.ObterTodos());
-            return agendamento;
-        }
-
 
     }
 }

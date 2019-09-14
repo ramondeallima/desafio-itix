@@ -13,13 +13,17 @@ namespace UnimedAgendamentos.DAL.Mappings
         {
             builder.HasKey(p => p.Id);
 
-            builder.Property(a => a.Nome)
+            builder.Property(p => p.Nome)
                 .IsRequired()
                 .HasColumnType("varchar(200)");
 
-            builder.Property(a => a.Telefone)
+            builder.Property(p => p.Telefone)
                 .IsRequired()
                 .HasColumnType("varchar(20)");
+
+            builder.Property(p => p.DataNascimento)
+                .IsRequired()
+                .HasColumnType("date");
 
             // 1 : N => Paciente : Agendamentos 
             builder.HasMany(p => p.Agendamentos)

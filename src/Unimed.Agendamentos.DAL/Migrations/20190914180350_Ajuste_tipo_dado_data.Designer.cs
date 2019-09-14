@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UnimedAgendamentos.DAL.Context;
 
 namespace Unimed.Agendamentos.DAL.Migrations
 {
     [DbContext(typeof(UnimedAgendamentosDbContext))]
-    partial class UnimedAgendamentosDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190914180350_Ajuste_tipo_dado_data")]
+    partial class Ajuste_tipo_dado_data
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,8 +75,7 @@ namespace Unimed.Agendamentos.DAL.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("DataNascimento")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("DataNascimento");
 
                     b.Property<string>("Nome")
                         .IsRequired()

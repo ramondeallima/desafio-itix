@@ -21,6 +21,10 @@ namespace UnimedAgendamentos.DAL.Mappings
                 .IsRequired()
                 .HasColumnType("varchar(20)");
 
+            builder.Property(p => p.Cpf)
+                .IsRequired()
+                .HasColumnType("varchar(11)");
+
             builder.Property(p => p.DataNascimento)
                 .IsRequired()
                 .HasColumnType("date");

@@ -1,28 +1,30 @@
 ﻿@model Unimed.Agendamentos.UI.ViewModels.AgendamentoViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Agendamento";
 }
 
-<h1>Edit</h1>
-
-<h4>AgendamentoViewModel</h4>
+<h4>@ViewData["Title"]</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-5">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <input type="hidden" asp-for="Id" />
+            
             <div class="form-group">
                 <label asp-for="MedicoId" class="control-label"></label>
-                <select asp-for="MedicoId" class="form-control" asp-items="ViewBag.MedicoId"></select>
-                <span asp-validation-for="MedicoId" class="text-danger"></span>
+                <input asp-for="@Model.Medico.Nome" class="form-control" disabled></input>
+                <span asp-validation-for="@Model.Medico.Nome" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="PacienteId" class="control-label"></label>
-                <select asp-for="PacienteId" class="form-control" asp-items="ViewBag.PacienteId"></select>
-                <span asp-validation-for="PacienteId" class="text-danger"></span>
+                <input asp-for="@Model.Paciente.Nome" class="form-control" disabled"></input>
+                <span asp-validation-for="@Model.Paciente.Nome" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="InicioAtendimento" class="control-label"></label>
                 <input asp-for="InicioAtendimento" class="form-control" />
@@ -35,18 +37,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="Observacao" class="control-label"></label>
-                <input asp-for="Observacao" class="form-control" />
+                <textarea cols="40" rows="2" asp-for="Observacao" class="form-control"></textarea>
                 <span asp-validation-for="Observacao" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <a class="btn btn-info" href="javascript:window.history.back();">Voltar</a>
+                <input type="submit" value="Salvar" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

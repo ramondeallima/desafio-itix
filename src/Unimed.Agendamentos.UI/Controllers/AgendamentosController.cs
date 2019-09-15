@@ -9,6 +9,7 @@ using UnimedAgendamentos.BLL.Models;
 
 namespace Unimed.Agendamentos.UI.Controllers
 {
+    [Route("agendamentos")]
     public class AgendamentosController : Controller
     {
         private readonly IAgendamentosRepository _agendamentoRepository;
@@ -26,12 +27,14 @@ namespace Unimed.Agendamentos.UI.Controllers
             _pacienteRepository = pacienteRepository;
             _mapper = mapper;
         }
-
+        
+        [Route("lista-de-agendamentos")]
         public async Task<IActionResult> Index()
         {
             return View(_mapper.Map<IEnumerable<AgendamentoViewModel>>(await _agendamentoRepository.ObterAgendamentosPacientes()));
         }
 
+        [Route("detalhes-do-agendamento")]
         public async Task<IActionResult> Details(Guid id)
         {
 
@@ -45,6 +48,7 @@ namespace Unimed.Agendamentos.UI.Controllers
             return View(agendamentoViewModel);
         }
 
+        [Route("novo-agendamento")]
         public async Task<IActionResult> Create()
         {
             var agendamentoViewModel = new AgendamentoViewModel();
@@ -55,6 +59,7 @@ namespace Unimed.Agendamentos.UI.Controllers
             return View(agendamentoViewModel);
         }
 
+        [Route("novo-agendamento")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AgendamentoViewModel agendamentoViewModel)
@@ -69,6 +74,7 @@ namespace Unimed.Agendamentos.UI.Controllers
             return RedirectToAction("Index");
         }
 
+        [Route("editar-agendamento/{id:guid}")]
         public async Task<IActionResult> Edit(Guid id)
         {
             var agendamentoViewModel = await ObterAgendamento(id);
@@ -80,6 +86,7 @@ namespace Unimed.Agendamentos.UI.Controllers
             return View(agendamentoViewModel);
         }
 
+        [Route("editar-agendamento/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, AgendamentoViewModel agendamentoViewModel)
@@ -101,6 +108,7 @@ namespace Unimed.Agendamentos.UI.Controllers
 
         }
 
+        [Route("excluir-agendamento/{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var agendamento = await ObterAgendamento(id);
@@ -113,6 +121,7 @@ namespace Unimed.Agendamentos.UI.Controllers
             return View(agendamento);
         }
 
+        [Route("excluir-agendamento/{id:guid}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)

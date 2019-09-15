@@ -9,7 +9,7 @@ using UnimedAgendamentos.BLL.Models;
 
 namespace Unimed.Agendamentos.UI.Controllers
 {
-
+    [Route("pacientes")]
     public class PacientesController : BaseController
     {
         private readonly IPacienteRepository _pacientesRepository;
@@ -21,11 +21,13 @@ namespace Unimed.Agendamentos.UI.Controllers
             _mapper = mapper;
         }
 
+        [Route("lista-de-pacientes")]
         public async Task<IActionResult> Index()
         {
             return View(_mapper.Map<IEnumerable<PacienteViewModel>>(await _pacientesRepository.ObterTodos()));
         }
 
+        [Route("detalhes-do-paciente/{id:guid}")]
         public async Task<IActionResult> Details(Guid id)
         {
 
@@ -38,11 +40,13 @@ namespace Unimed.Agendamentos.UI.Controllers
             return View(pacienteViewModel);
         }
 
+        [Route("novo-paciente")]
         public IActionResult Create()
         {
             return View();
         }
 
+        [Route("novo-paciente")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(PacienteViewModel pacienteViewModel)
@@ -55,6 +59,7 @@ namespace Unimed.Agendamentos.UI.Controllers
             return RedirectToAction("Index");
         }
 
+        [Route("editar-paciente/{id:guid}")]
         public async Task<IActionResult> Edit(Guid id)
         {
 
@@ -66,7 +71,7 @@ namespace Unimed.Agendamentos.UI.Controllers
             return View(pacienteViewModel);
         }
 
-
+        [Route("editar-paciente/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, PacienteViewModel pacienteViewModel)
@@ -80,7 +85,8 @@ namespace Unimed.Agendamentos.UI.Controllers
 
             return RedirectToAction("Index");
         }
-         
+
+        [Route("excluir-paciente/{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
 
@@ -93,6 +99,7 @@ namespace Unimed.Agendamentos.UI.Controllers
             return View(pacienteViewModel);
         }
 
+        [Route("excluir-paciente/{id:guid}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)

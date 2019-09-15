@@ -14,6 +14,7 @@ using UnimedAgendamentos.BLL.Models;
 
 namespace Unimed.Agendamentos.UI.Controllers
 {
+    [Route("medicos")]
     public class MedicosController : Controller
     {
         private readonly IMedicoRepository _medicoRepository;
@@ -26,11 +27,13 @@ namespace Unimed.Agendamentos.UI.Controllers
             _mapper = mapper;
         }
 
+        [Route("lista-de-medicos")]
         public async Task<IActionResult> Index()
         {
             return View(_mapper.Map<IEnumerable<MedicoViewModel>>(await _medicoRepository.ObterTodos()));
         }
 
+        [Route("detalhes-do-medico/{id:guid}")]
         public async Task<IActionResult> Details(Guid id)
         {
             var medicoViewModel = _mapper.Map<MedicoViewModel>(await _medicoRepository.ObterPorId(id));
@@ -42,11 +45,13 @@ namespace Unimed.Agendamentos.UI.Controllers
             return View(medicoViewModel);
         }
 
+        [Route("novo-medico")]
         public IActionResult Create()
         {
             return View();
         }
 
+        [Route("novo-medico")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(MedicoViewModel medicoViewModel)
@@ -59,6 +64,7 @@ namespace Unimed.Agendamentos.UI.Controllers
             return RedirectToAction("Index");
         }
 
+        [Route("editar-medico/{id:guid}")]
         public async Task<IActionResult> Edit(Guid id)
         {
             var medicoViewModel = _mapper.Map<MedicoViewModel>(await _medicoRepository.ObterPorId(id));
@@ -69,6 +75,7 @@ namespace Unimed.Agendamentos.UI.Controllers
             return View(medicoViewModel);
         }
 
+        [Route("editar-medico/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, MedicoViewModel medicoViewModel)
@@ -82,6 +89,7 @@ namespace Unimed.Agendamentos.UI.Controllers
             return RedirectToAction("Index");
         }
 
+        [Route("excluir-medico/{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
 
@@ -92,6 +100,7 @@ namespace Unimed.Agendamentos.UI.Controllers
             return View(medicoViewModel);
         }
 
+        [Route("excluir-medico/{id:guid}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)

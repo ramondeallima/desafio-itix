@@ -12,6 +12,9 @@ using UnimedAgendamentos.DAL.Context;
 using Unimed.Agendamentos.DAL.Repository;
 using Unimed.Agendamentos.BLL.Interfaces;
 using AutoMapper;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using System.Collections.Generic;
 
 namespace Unimed.Agendamentos.UI
 {
@@ -45,6 +48,14 @@ namespace Unimed.Agendamentos.UI
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddAutoMapper(typeof(Startup));
+
+            var defaultCulture = new CultureInfo("pt-BR");
+            var localizationOptions = new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture(defaultCulture),
+                SupportedCultures = new List<CultureInfo> { defaultCulture },
+                SupportedUICultures = new List<CultureInfo> { defaultCulture }
+            };
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 

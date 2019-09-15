@@ -14,7 +14,6 @@ using UnimedAgendamentos.BLL.Models;
 
 namespace Unimed.Agendamentos.UI.Controllers
 {
-    [DisplayColumn("Médicos")]
     public class MedicosController : Controller
     {
         private readonly IMedicoRepository _medicoRepository;
@@ -62,7 +61,7 @@ namespace Unimed.Agendamentos.UI.Controllers
 
         public async Task<IActionResult> Edit(Guid id)
         {
-            var medicoViewModel = await _medicoRepository.ObterPorId(id);
+            var medicoViewModel = _mapper.Map<MedicoViewModel>(await _medicoRepository.ObterPorId(id));
             if (medicoViewModel == null)
             {
                 return NotFound();
@@ -86,7 +85,7 @@ namespace Unimed.Agendamentos.UI.Controllers
         public async Task<IActionResult> Delete(Guid id)
         {
 
-            var medicoViewModel = _mapper.Map<PacienteViewModel>(await _medicoRepository.ObterPorId(id));
+            var medicoViewModel = _mapper.Map<MedicoViewModel>(await _medicoRepository.ObterPorId(id));
 
             if (medicoViewModel == null) return NotFound();
 
@@ -97,7 +96,7 @@ namespace Unimed.Agendamentos.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var medicoViewModel = _mapper.Map<PacienteViewModel>(await _medicoRepository.ObterPorId(id));
+            var medicoViewModel = _mapper.Map<MedicoViewModel>(await _medicoRepository.ObterPorId(id));
             if (medicoViewModel == null) return NotFound();
 
             await _medicoRepository.Remover(id);

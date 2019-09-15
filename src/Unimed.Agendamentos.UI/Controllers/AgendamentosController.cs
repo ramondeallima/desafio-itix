@@ -72,6 +72,7 @@ namespace Unimed.Agendamentos.UI.Controllers
         public async Task<IActionResult> Edit(Guid id)
         {
             var agendamentoViewModel = await ObterAgendamento(id);
+
             if (agendamentoViewModel == null)
             {
                 return NotFound();
@@ -85,9 +86,16 @@ namespace Unimed.Agendamentos.UI.Controllers
         {
             if (id != agendamentoViewModel.Id) return NotFound();
 
+            var agendamentoAtualizacao = await ObterAgendamento(id);
+
+
             if (!ModelState.IsValid) return View(agendamentoViewModel);
 
-            await _agendamentoRepository.Atualizar(_mapper.Map<Agendamento>(agendamentoViewModel));
+            agendamentoAtualizacao.InicioAtendimento = agendamentoViewModel.InicioAtendimento;
+            agendamentoAtualizacao.FimAtendimento = agendamentoViewModel.FimAtendimento;
+            agendamentoAtualizacao.Observacao = agendamentoViewModel.Observacao;
+
+            await _agendamentoRepository.Atualizar(_mapper.Map<Agendamento>(agendamentoAtualizacao));
             return RedirectToAction("Index");
             
 
@@ -123,9 +131,7 @@ namespace Unimed.Agendamentos.UI.Controllers
         private async Task<AgendamentoViewModel> ObterAgendamento(Guid id)
         {
             var agendamento = _mapper.Map<AgendamentoViewModel>(await _agendamentoRepository.ObterAgendamentoPaciente(id));
-
-            agendamento.Pacientes = _mapper.Map<IEnumerable<PacienteViewModel>>(await _pacienteRepository.ObterTodos());
-
+            agendamento.Medico = _mapper.Map<MedicoViewModel>(await _medicoRepository.ObterPorId(agendamento.MedicoId));
             return agendamento;
         }
 

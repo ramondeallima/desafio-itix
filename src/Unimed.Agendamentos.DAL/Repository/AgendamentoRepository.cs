@@ -22,7 +22,9 @@ namespace Unimed.Agendamentos.DAL.Repository
 
         public async Task<IEnumerable<Agendamento>> ObterAgendamentosPacientes()
         {
-            return await Db.Agendas.AsNoTracking().Include(p => p.Paciente)
+            return await Db.Agendas.AsNoTracking()
+                .Include(p => p.Paciente)
+                .Include(m => m.Medico)
                 .OrderBy(a => a.InicioAtendimento).ToListAsync();
         }
 

@@ -58,7 +58,7 @@ namespace Unimed.Agendamentos.UI.Controllers
         public async Task<IActionResult> Edit(Guid id)
         {
 
-            var pacienteViewModel = await _pacientesRepository.ObterPorId(id);
+            var pacienteViewModel = _mapper.Map<PacienteViewModel>(await _pacientesRepository.ObterPorId(id));
             if (pacienteViewModel == null)
             {
                 return NotFound();

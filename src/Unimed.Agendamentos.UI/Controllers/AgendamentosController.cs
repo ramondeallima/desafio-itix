@@ -10,21 +10,25 @@ using UnimedAgendamentos.BLL.Models;
 namespace Unimed.Agendamentos.UI.Controllers
 {
     [Route("agendamentos")]
-    public class AgendamentosController : Controller
+    public class AgendamentosController : BaseController
     {
         private readonly IAgendamentosRepository _agendamentoRepository;
         private readonly IMedicoRepository _medicoRepository;
         private readonly IPacienteRepository _pacienteRepository;
+        private readonly IAgendamentoService _agendamentoService;
         private readonly IMapper _mapper;
 
         public AgendamentosController(IAgendamentosRepository agendamentosRepository,
                                       IMedicoRepository medicoRepository,
                                       IPacienteRepository pacienteRepository,
-                                      IMapper mapper)
+                                      IAgendamentoService agendamentoService,
+                                      IMapper mapper,
+                                      INotificador notificador) : base(notificador)
         {
             _agendamentoRepository = agendamentosRepository;
             _medicoRepository = medicoRepository;
             _pacienteRepository = pacienteRepository;
+            _agendamentoService = agendamentoService;
             _mapper = mapper;
         }
         
@@ -69,7 +73,10 @@ namespace Unimed.Agendamentos.UI.Controllers
 
             if (!ModelState.IsValid) return View(agendamentoViewModel);
 
-            await _agendamentoRepository.Adicionar(_mapper.Map<Agendamento>(agendamentoViewModel));
+            await _agendamentoService.Adicionar(_mapper.Map<Agendamento>(agendamentoViewModel));
+            if (!OperacaoValida()) return View(agendamentoViewModel);
+
+            TempData["Sucesso"] = "Agendamento cadastrado com sucesso!";
 
             return RedirectToAction("Index");
         }
@@ -102,7 +109,9 @@ namespace Unimed.Agendamentos.UI.Controllers
             agendamentoAtualizacao.FimAtendimento = agendamentoViewModel.FimAtendimento;
             agendamentoAtualizacao.Observacao = agendamentoViewModel.Observacao;
 
-            await _agendamentoRepository.Atualizar(_mapper.Map<Agendamento>(agendamentoAtualizacao));
+            await _agendamentoService.Atualizar(_mapper.Map<Agendamento>(agendamentoAtualizacao));
+            if (!OperacaoValida()) return View(agendamentoViewModel);
+
             return RedirectToAction("Index");
             
 
@@ -133,7 +142,11 @@ namespace Unimed.Agendamentos.UI.Controllers
                 return NotFound();
             }
 
-            await _agendamentoRepository.Remover(id);
+            await _agendamentoService.Remover(id);
+            if (!OperacaoValida()) return View(agendamento);
+
+            TempData["Sucesso"] = "Agendamento excluído com sucesso!";
+
             return RedirectToAction("Index");
         }
 
@@ -141,6 +154,7 @@ namespace Unimed.Agendamentos.UI.Controllers
         {
             var agendamento = _mapper.Map<AgendamentoViewModel>(await _agendamentoRepository.ObterAgendamentoPaciente(id));
             agendamento.Medico = _mapper.Map<MedicoViewModel>(await _medicoRepository.ObterPorId(agendamento.MedicoId));
+
             return agendamento;
         }
 

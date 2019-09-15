@@ -15,6 +15,8 @@ using AutoMapper;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using System.Collections.Generic;
+using Unimed.Agendamentos.BLL.Notifications;
+using Unimed.Agendamentos.BLL.Services;
 
 namespace Unimed.Agendamentos.UI
 {
@@ -63,6 +65,11 @@ namespace Unimed.Agendamentos.UI
             services.AddScoped<IPacienteRepository, PacienteRepository>();
             services.AddScoped<IMedicoRepository, MedicoRepository>();
             services.AddScoped<IAgendamentosRepository, AgendamentoRepository>();
+
+            services.AddScoped<INotificador, Notificador>();
+            services.AddScoped<IPacienteService, PacienteService>();
+            services.AddScoped<IMedicoService, MedicoService>();
+            services.AddScoped<IAgendamentoService, AgendamentoService>();
 
         }
 

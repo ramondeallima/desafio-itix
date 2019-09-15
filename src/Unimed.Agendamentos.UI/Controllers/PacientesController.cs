@@ -13,12 +13,16 @@ namespace Unimed.Agendamentos.UI.Controllers
     public class PacientesController : BaseController
     {
         private readonly IPacienteRepository _pacientesRepository;
+        private readonly IPacienteService _pacientesService;
         private readonly IMapper _mapper;
         public PacientesController(IPacienteRepository pacientesRepository,
-                                   IMapper mapper)
+                                   IMapper mapper,
+                                   IPacienteService pacienteService,
+                                   INotificador notificador) : base(notificador)
         {
             _pacientesRepository = pacientesRepository;
             _mapper = mapper;
+            _pacientesService = pacienteService;
         }
 
         [Route("lista-de-pacientes")]
@@ -54,7 +58,11 @@ namespace Unimed.Agendamentos.UI.Controllers
             if (!ModelState.IsValid) return View(pacienteViewModel);
 
             var paciente = _mapper.Map<Paciente>(pacienteViewModel);
-            await _pacientesRepository.Adicionar(paciente);
+            await _pacientesService.Adicionar(paciente);
+
+            if (!OperacaoValida()) return View(pacienteViewModel);
+
+            TempData["Sucesso"] = "Paciente cadastrado com sucesso!";
 
             return RedirectToAction("Index");
         }
@@ -81,7 +89,9 @@ namespace Unimed.Agendamentos.UI.Controllers
             if (!ModelState.IsValid) return View(pacienteViewModel);
 
             var paciente = _mapper.Map<Paciente>(pacienteViewModel);
-            await _pacientesRepository.Atualizar(paciente);
+            await _pacientesService.Atualizar(paciente);
+
+            if (!OperacaoValida()) return View(pacienteViewModel);
 
             return RedirectToAction("Index");
         }
@@ -108,7 +118,12 @@ namespace Unimed.Agendamentos.UI.Controllers
 
             if (pacienteViewModel == null) return NotFound();
 
-            await _pacientesRepository.Remover(id);
+            await _pacientesService.Remover(id);
+
+            if (!OperacaoValida()) return View(pacienteViewModel);
+
+            TempData["Sucesso"] = "Médico excluído com sucesso!";
+
             return RedirectToAction("Index");
         }
 

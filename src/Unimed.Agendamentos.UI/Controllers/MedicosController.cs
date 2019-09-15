@@ -15,15 +15,19 @@ using UnimedAgendamentos.BLL.Models;
 namespace Unimed.Agendamentos.UI.Controllers
 {
     [Route("medicos")]
-    public class MedicosController : Controller
+    public class MedicosController : BaseController
     {
         private readonly IMedicoRepository _medicoRepository;
+        private readonly IMedicoService _medicoService;
         private readonly IMapper _mapper;
 
         public MedicosController(IMedicoRepository  medicoRepository,
-                                 IMapper mapper)
+                                 IMedicoService medicoService,
+                                 IMapper mapper,
+                                 INotificador notificador) : base(notificador)                                 
         {
             _medicoRepository = medicoRepository;
+            _medicoService = medicoService;
             _mapper = mapper;
         }
 
@@ -59,7 +63,10 @@ namespace Unimed.Agendamentos.UI.Controllers
             if (!ModelState.IsValid) return View(medicoViewModel);
 
             var medico = _mapper.Map<Medico>(medicoViewModel);
-            await _medicoRepository.Adicionar(medico);
+            await _medicoService.Adicionar(medico);
+            if (!OperacaoValida()) return View(medicoViewModel);
+
+            TempData["Sucesso"] = "Médico cadastrado com sucesso!";
 
             return RedirectToAction("Index");
         }
@@ -85,7 +92,9 @@ namespace Unimed.Agendamentos.UI.Controllers
             if (!ModelState.IsValid) return View(medicoViewModel);
 
             var medico = _mapper.Map<Medico>(medicoViewModel);
-            await _medicoRepository.Atualizar(medico);
+            await _medicoService.Atualizar(medico);
+            if (!OperacaoValida()) return View(medicoViewModel);
+
             return RedirectToAction("Index");
         }
 
@@ -108,7 +117,11 @@ namespace Unimed.Agendamentos.UI.Controllers
             var medicoViewModel = _mapper.Map<MedicoViewModel>(await _medicoRepository.ObterPorId(id));
             if (medicoViewModel == null) return NotFound();
 
-            await _medicoRepository.Remover(id);
+            await _medicoService.Remover(id);
+            if (!OperacaoValida()) return View(medicoViewModel);
+
+            TempData["Sucesso"] = "Médico excluído com sucesso!";
+
             return RedirectToAction("Index");
         }
     }

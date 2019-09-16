@@ -33,7 +33,7 @@
 ## Tecnologias Utilizadas
 - ASP.NET MVC Core 2.2.402
 - Bootstrap 4
-- Entre outros frameworks como: Entity Framework Core, FluentValidation, AutoMapper, xUnit.
+- Entre outros frameworks como: Entity Framework Core, FluentValidation, AutoMapper.
 
 
 

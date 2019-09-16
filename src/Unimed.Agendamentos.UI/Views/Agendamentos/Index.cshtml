@@ -29,6 +29,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Observacao)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Paciente.DataNascimento)
+            </th>
 
             <th></th>
         </tr>
@@ -52,6 +55,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Observacao)
+                </td>
+                <td class="pl-5">
+                    @item.Paciente.DataNascimento.ToString("dd/MM/yyyy")
                 </td>
 
                 <td class="text-right">

@@ -62,7 +62,7 @@ namespace Unimed.Agendamentos.DAL.Repository
         {
             return await Db.SaveChangesAsync();
         }
-        public virtual async void Dispose()
+        public void Dispose()
         {
             Db?.Dispose();
         }

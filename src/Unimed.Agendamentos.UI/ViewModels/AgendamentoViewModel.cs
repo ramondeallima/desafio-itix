@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using UnimedAgendamentos.BLL.Models;
@@ -38,7 +39,9 @@ namespace Unimed.Agendamentos.UI.ViewModels
         public PacienteViewModel Paciente { get; set; }
         public MedicoViewModel Medico { get; set; }
 
+        [NotMapped]
         public IEnumerable<PacienteViewModel> Pacientes { get; set; }
+        [NotMapped]
         public IEnumerable<MedicoViewModel> Medicos { get; set; }
     }
 }

@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Localization;
 using System.Collections.Generic;
 using Unimed.Agendamentos.BLL.Notifications;
 using Unimed.Agendamentos.BLL.Services;
+using Unimed.Agendamentos.BLL.Services.Validacao;
 
 namespace Unimed.Agendamentos.UI
 {
@@ -70,6 +71,7 @@ namespace Unimed.Agendamentos.UI
             services.AddScoped<IPacienteService, PacienteService>();
             services.AddScoped<IMedicoService, MedicoService>();
             services.AddScoped<IAgendamentoService, AgendamentoService>();
+            services.AddScoped<IAgendamentoValidacao, AgendamentoValidacao>();
 
         }
 

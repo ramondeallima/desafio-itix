@@ -110,7 +110,7 @@ namespace Unimed.Agendamentos.UI.Controllers
             agendamentoAtualizacao.Observacao = agendamentoViewModel.Observacao;
 
             await _agendamentoService.Atualizar(_mapper.Map<Agendamento>(agendamentoAtualizacao));
-            if (!OperacaoValida()) return View(agendamentoViewModel);
+            if (!OperacaoValida()) return View(agendamentoAtualizacao);
 
             return RedirectToAction("Index");
             

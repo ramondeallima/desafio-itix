@@ -15,7 +15,6 @@ namespace Unimed.Agendamentos.BLL.Services
         private readonly IAgendamentosRepository _agendamentosRepository;
         private readonly IAgendamentoValidacao _agendamentoValidacao;
 
-
         public AgendamentoService(INotificador notificador,
                                   IAgendamentosRepository agendamentosRepository,
                                   IAgendamentoValidacao agendamentoValidacao) : base(notificador)

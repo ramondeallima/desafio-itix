@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Unimed.Agendamentos.BLL.Interfaces;
 using Unimed.Agendamentos.UI.ViewModels;
@@ -9,6 +10,7 @@ using UnimedAgendamentos.BLL.Models;
 
 namespace Unimed.Agendamentos.UI.Controllers
 {
+    [Authorize]
     [Route("agendamentos")]
     public class AgendamentosController : BaseController
     {

@@ -13,5 +13,6 @@ namespace UnimedAgendamentos.BLL.Models
 
         /* Relações */
         public IEnumerable<Agendamento> Agendamentos { get; set; }
+
     }
 }

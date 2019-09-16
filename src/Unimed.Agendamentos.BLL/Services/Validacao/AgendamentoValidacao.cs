@@ -37,8 +37,8 @@ namespace Unimed.Agendamentos.BLL.Services.Validacao
             }
 
             if (agendamento.InicioAtendimento.DayOfWeek == 0 || (int)agendamento.InicioAtendimento.DayOfWeek == 6 ||
-                agendamento.InicioAtendimento.Hour < 8 || agendamento.InicioAtendimento.Hour > 18 ||
-                agendamento.FimAtendimento.Hour < 8 || agendamento.FimAtendimento.Hour > 18)
+                agendamento.InicioAtendimento.Hour < 8 || agendamento.InicioAtendimento.TimeOfDay.TotalHours > 18 ||
+                agendamento.FimAtendimento.Hour < 8 || agendamento.FimAtendimento.TimeOfDay.TotalHours > 18)
             {
                 Notificar("Horário de agendamento: Segunda a Sexta das 8h às 18h.");
                 return false;
